@@ -1,0 +1,89 @@
+﻿<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                <span class="fa fa-bank" ng-show="banktransactions.isDharaneeTrans == 'false'">&nbsp;Bank Transactions</span>
+                <span class="fa fa-bank" ng-show="banktransactions.isDharaneeTrans == 'true'">&nbsp;Dharanee Transactions</span>
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Filters
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                        <div class="form-group col-lg-12">
+                            <div class="col-lg-4">
+                                <label>Particulars</label>
+                                <input type="text" class="form-control"
+                                       ng-model="banktransactions.particulars"
+                                       ng-disabled="banktransactions.isDharaneeTrans == 'true'" placeholder="Type here.." />
+                            </div>
+                            <div class="col-lg-4">
+                                <label>Bank</label>
+                                <select class="form-control"
+                                        ng-model="banktransactions.filteredBank"
+                                        ng-options="item as item.bankShortName for item in banktransactions.banks"
+                                        ng-change="banktransactions.getFilteredBanks(banktransactions.filteredBank)">
+                                    <option value="">-All-</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <label>Mode</label>
+                                <select class="form-control"
+                                        ng-model="configurebanktran.filteredMode"
+                                        ng-options="item as item.transferName for item in banktransactions.modeOfTransfers"
+                                        ng-change="banktransactions.getFilteredModes(configurebanktran.filteredMode)">
+                                    <option value="">-All-</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="padding: 0px">
+                    All Bank transactions
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <!--<th class="col-lg-1 text-center"><input type="checkbox" ng-model="banktransactions.allRows" ng-click="banktransactions.selectOrUnSelectAllRows()" /></th>-->
+                                <th class="col-lg-1">Sl.No</th>
+                                <th class="col-lg-4">Particulars</th>
+                                <th class="col-lg-1">Bank</th>
+                                <th class="col-lg-1">Mode</th>
+                                <th class="col-lg-2 text-right">Cash Receipts</th>
+                                <th class="col-lg-2 text-right">Cash Payments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in banktransactions.bankTrans | filter:banktransactions.particulars">
+                                <!--ng-class="{danger: item.rowSelected}"-->
+                                <!--<td class="text-center">
+            <input type="checkbox" ng-model="item.rowSelected" />
+        </td>-->
+                                <td>{{$index + 1}}</td>
+                                <td>{{item.particulars}}</td>
+                                <td>{{item.bank}}</td>
+                                <td>{{item.mode}}</td>
+                                <td class="text-right">{{item.cashReceipt | number: 2}}</td>
+                                <td class="text-right">{{item.cashPayment | number: 2}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

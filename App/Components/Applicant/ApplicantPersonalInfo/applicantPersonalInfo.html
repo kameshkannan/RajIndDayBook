@@ -1,0 +1,236 @@
+﻿<div class="row">
+
+    <div class="col-xs-12 applicantpersonalinfo-container">
+
+        <form name="appPersonalInfoForm" ng-init="vm.initializeDirective()" novalidate>
+
+            <div class="card">
+
+                <div class="card-header">APPLICANT PERSONAL INFORMATION</div><!-- card-header -->
+
+                <div class="card-block">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Title:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           name="title"
+                                           ng-model="vm.uidata.title"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="4"
+                                           ng-class="{req:vm.formsubmit && appPersonalInfoForm.title.$error.pattern}"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="appPersonalInfoForm.title.$error.pattern" class="text-danger">Invalid Title</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">First Name:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           name="firstName"
+                                           ng-model="vm.uidata.firstName"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="15"
+                                           ng-class="{req:vm.formsubmit && (appPersonalInfoForm.firstName.$invalid || appPersonalInfoForm.firstName.$error.pattern)}"
+                                           ng-required="true"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="appPersonalInfoForm.firstName.$error.pattern" class="text-danger">Invalid First Name</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Last Name:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           name="lastName"
+                                           ng-model="vm.uidata.lastName"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="25"
+                                           ng-class="{req:vm.formsubmit && (appPersonalInfoForm.lastName.$invalid || appPersonalInfoForm.lastName.$error.pattern)}"
+                                           ng-required="true"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="appPersonalInfoForm.lastName.$error.pattern" class="text-danger">Invalid Last Name</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Middle Initial:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.middleInitial"
+                                           name="middleInitial"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="1"
+                                           ng-class="{req:vm.formsubmit && (appPersonalInfoForm.middleInitial.$invalid || appPersonalInfoForm.middleInitial.$error.pattern)}"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="appPersonalInfoForm.middleInitial.$error.pattern" class="text-danger">Invalid Middle Initial</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Suffix:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.suffix"
+                                            name="suffix"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlSuffix"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">SSN:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.ssn"
+                                           name="ssn"
+                                           ng-pattern='/^[0-9]{9}$/'
+                                           maxlength="9"
+                                           ng-required="true"
+                                           ng-class="{req:vm.formsubmit && (appPersonalInfoForm.ssn.$invalid || appPersonalInfoForm.ssn.$error.pattern)}"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="appPersonalInfoForm.ssn.$error.pattern" class="text-danger">Invalid SSN</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">DOB(mmddyyyy):</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.dob"
+                                           name="dob"
+                                           ng-blur="vm.validateDateOfBirth()"
+                                           ng-pattern="/^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(19|20)\d{2}$/"
+                                           maxlength="8"
+                                           ng-required="true"
+                                           ng-class="{req:vm.formsubmit && (appPersonalInfoForm.dob.$invalid || appPersonalInfoForm.dob.$error.pattern)}"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="!vm.isValidDateInd || appPersonalInfoForm.dob.$error.pattern" class="text-danger">Invalid Date</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Country of Citizenship:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.countryOfCitizenship"
+                                            name="country"
+                                            ng-selected="$first"
+                                            ng-change="vm.updateResidentAlien()"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlCountry"
+                                            ng-class="{req:vm.formsubmit && appPersonalInfoForm.country.$invalid}"
+                                            ng-required="true"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Resident Alien:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.residentAlien"
+                                            name="residentalien"
+                                            ng-selected="$first"
+                                            ng-disabled="!vm.isResidentAlienInd"
+                                            ng-options="type.key as type.value for type in vm.staticData.SelectYesNo"
+                                            ng-class="{req:vm.formsubmit && appPersonalInfoForm.residentalien.$invalid}"
+                                            ng-required="true"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label class="reqfield">Are you currently a Director, Executive Officer, or a Principal Shareholder of any Bank, thrift, or other depository institution:</label>
+                                    <select ng-model="vm.uidata.directorOrExecutive"
+                                            name="directorOrExecutive"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.SelectYesNo"
+                                            ng-class="{req:vm.formsubmit && appPersonalInfoForm.directorOrExecutive.$invalid}"
+                                            ng-required="true"
+                                            class="form-control form-control-sm" />
+                                </div><!-- form-inline -->
+                            </div><!-- form-group -->
+                        </div><!-- col-xs-12 col-sm-12 col-md-12 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield: vm.uidata.directorOrExecutive=='Y'}">Institution Name:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           name="institutionName"
+                                           ng-model="vm.uidata.institutionName"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="25"
+                                           ng-required="vm.uidata.directorOrExecutive=='Y'"
+                                           ng-class="{req: vm.formsubmit && (appPersonalInfoForm.institutionName.$invalid || appPersonalInfoForm.institutionName.$error.pattern)}"
+                                           class="form-control form-control-sm"
+                                           ng-disabled="vm.uidata.directorOrExecutive!='Y'" />
+                                    <small ng-show="appPersonalInfoForm.institutionName.$error.pattern" class="text-danger">Invalid Name</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield: vm.uidata.directorOrExecutive=='Y'}">Headquarter Location City:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           name="locationcity"
+                                           ng-model="vm.uidata.headquarterCity"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="25"
+                                           ng-required="vm.uidata.directorOrExecutive=='Y'"
+                                           ng-class="{req: vm.formsubmit && (appPersonalInfoForm.locationcity.$invalid || appPersonalInfoForm.locationcity.$error.pattern)}"
+                                           class="form-control form-control-sm"
+                                           ng-disabled="vm.uidata.directorOrExecutive!='Y'" />
+                                    <small ng-show="appPersonalInfoForm.locationcity.$error.pattern" class="text-danger">Invalid City</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield: vm.uidata.directorOrExecutive=='Y'}">State:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.state"
+                                            name="state"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlState"
+                                            ng-required="vm.uidata.directorOrExecutive=='Y'"
+                                            ng-class="{req:vm.formsubmit && appPersonalInfoForm.state.$invalid}"
+                                            class="form-control form-control-sm"
+                                            ng-disabled="vm.uidata.directorOrExecutive!='Y'" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                </div><!-- card-block -->
+
+            </div><!-- card -->
+
+        </form>
+    </div><!-- col-xs-12 -->
+</div><!-- row -->
+<!-- Do not Delete Style Tag -->
+<style></style>

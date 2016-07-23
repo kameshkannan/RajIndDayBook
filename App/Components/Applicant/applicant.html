@@ -1,0 +1,48 @@
+﻿<div class="applicant-container">
+    <form name="applicantform" novalidate>
+        
+        <discovery uidata="applicant.app.discovery"
+                   disclosure-data="applicant.disclosure"
+                   indicators="applicant.indicators"
+                   main-routes="main.allRoutes">
+        </discovery>
+
+            <applicant-personal-info uidata="applicant.app.appPersonalInfo"></applicant-personal-info>
+
+            <contact-info uidata="applicant.app.contactInfo"></contact-info>
+
+            <residential-address uidata="applicant.app.residentialAddress"
+                                 applicant-data="applicant.app"
+                                 indicators="applicant.indicators">
+            </residential-address>
+
+            <non-applicant-spouse-info uidata="applicant.app.nonSpouseInfo"
+                                       indicators="applicant.indicators">
+            </non-applicant-spouse-info>
+
+            <mailing-address uidata="applicant.app.mailingAddress"
+                             hidemailing-address="applicant.app.hidemailingAddress"
+                             indicators="applicant.indicators">
+            </mailing-address>
+
+            <previous-address uidata="applicant.app.previousAddress"
+                              indicators="applicant.indicators">
+
+            </previous-address>
+
+        <employment-info uidata="applicant.app.employmentInfo"
+                         indicators="applicant.indicators"
+                         disclosure-data="applicant.disclosure">
+        </employment-info>
+
+            <previous-employment-info uidata="applicant.app.previousEmploymentInfo"
+                                      indicators="applicant.indicators">
+            </previous-employment-info>
+
+            <applicant-income uidata="applicant.app.applicantIncome"></applicant-income>
+
+            <id-info uidata="applicant.app.idInfo"></id-info>
+
+   </form>
+
+</div><!-- applicant-container -->

@@ -1,0 +1,248 @@
+﻿<div class="row" ng-show="vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState == 'WI'">
+
+    <div class="col-xs-12 nonapplicantspouseinfo-container">
+
+        <form name="nonApplicantSpouseInfoForm" ng-init="vm.initializeDirective()" novalidate>
+
+            <div class="card">
+
+                <div class="card-header">NON-APPLICANT SPOUSE INFORMATION</div><!-- card-header -->
+
+                <div class="card-block">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Does your non applicant spouse live outside the US?</label>
+                                <div class="col-md-7">
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <select ng-model="vm.uidata.nonAppOutsideUS"
+                                                    name="nonAppOutsideUS"
+                                                    ng-selected="$first"
+                                                    ng-options="type.key as type.value for type in vm.staticData.SelectYesNo"
+                                                    ng-class="{req:vm.formsubmit && nonApplicantSpouseInfoForm.nonAppOutsideUS.$invalid && vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState=='WI'}"
+                                                    ng-required="vm.indicators.nonAppSpouseInd == 'Y'"
+                                                    class="form-control form-control-sm" />
+                                        </div><!-- form-group -->
+                                    </div><!-- form-inline -->
+                                </div><!-- col-md-7 -->
+                            </div><!-- form-group row -->
+                        </div><!-- col-xs-12 col-sm-12 col-md-12 -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Title:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           name="title"
+                                           ng-model="vm.uidata.title"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="4"
+                                           ng-class="{req:vm.formsubmit && nonApplicantSpouseInfoForm.title.$error.pattern}"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="nonApplicantSpouseInfoForm.title.$error.pattern" class="text-danger">Invalid Title</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">First Name:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.firstName"
+                                           name="firstName"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="15"
+                                           ng-class="{req:vm.formsubmit && vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState=='WI' && (nonApplicantSpouseInfoForm.firstName.$invalid || nonApplicantSpouseInfoForm.firstName.$error.pattern)}"
+                                           ng-required="vm.indicators.nonAppSpouseInd == 'Y'"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="nonApplicantSpouseInfoForm.firstName.$error.pattern" class="text-danger">
+                                        Invalid First Name
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Last Name:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.lastName"
+                                           name="lastName"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="25"
+                                           ng-class="{req:vm.formsubmit && (nonApplicantSpouseInfoForm.lastName.$invalid || nonApplicantSpouseInfoForm.lastName.$error.pattern) && vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState=='WI'}"
+                                           ng-required="vm.indicators.nonAppSpouseInd == 'Y'"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="nonApplicantSpouseInfoForm.lastName.$error.pattern" class="text-danger">
+                                        Invalid Last Name
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                    </div><!-- row -->
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Address Type:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.addressType"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlAddressType"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Street Address:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.streetAddress"
+                                           name="streetAddress"
+                                           ng-pattern='/^[0-9a-zA-Z.# _\/-]+$/'
+                                           maxlength="32"
+                                           ng-class="{req:vm.formsubmit && (nonApplicantSpouseInfoForm.streetAddress.$invalid || nonApplicantSpouseInfoForm.streetAddress.$error.pattern) && vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState=='WI'}"
+                                           ng-required="vm.indicators.nonAppSpouseInd == 'Y'"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="nonApplicantSpouseInfoForm.streetAddress.$error.pattern" class="text-danger">
+                                        Invalid Street Address
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Apt#:</label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="vm.uidata.aptNumber" maxlength="5" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                    </div><!-- row -->
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">City:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.city"
+                                           name="city"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="20"
+                                           ng-class="{req:vm.formsubmit && (nonApplicantSpouseInfoForm.city.$invalid || nonApplicantSpouseInfoForm.city.$error.pattern) && vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState=='WI'}"
+                                           ng-required="vm.indicators.nonAppSpouseInd == 'Y'"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="nonApplicantSpouseInfoForm.city.$error.pattern" class="text-danger">
+                                        Invalid City
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4" ng-show="vm.uidata.nonAppOutsideUS != 'Y'">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">State:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.state"
+                                            name="state"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlState"
+                                            ng-class="{req:vm.formsubmit && nonApplicantSpouseInfoForm.state.$invalid && vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState=='WI'}"
+                                            ng-required="vm.indicators.nonAppSpouseInd == 'Y'"
+                                            class="form-control form-control-sm" />
+                                    <small ng-show="nonApplicantSpouseInfoForm.state.$error.pattern" class="text-danger">
+                                        Invalid State
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Zip:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.zip"
+                                           name="zip"
+                                           ng-class="{req:vm.formsubmit && (nonApplicantSpouseInfoForm.zip.$invalid || nonApplicantSpouseInfoForm.zip.$error.pattern) && vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState=='WI'}"
+                                           ng-pattern='/^[0-9]{4,9}$/'
+                                           maxlength="9"
+                                           ng-required="vm.indicators.nonAppSpouseInd == 'Y'"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="nonApplicantSpouseInfoForm.zip.$error.pattern" class="text-danger">Invalid Zip</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Rural Rte.:</label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="vm.uidata.ruralRte" maxlength="15" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                    </div><!-- row -->
+
+                    <div class="row" ng-show="vm.uidata.nonAppOutsideUS == 'Y'">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Country:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.countryCode"
+                                            name="countryCode"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlCountry"
+                                            class="form-control form-control-sm"
+                                            ng-required="vm.indicators.nonAppSpouseInd == 'Y' && vm.uidata.nonAppOutsideUS == 'Y'"
+                                            ng-class="{req:vm.formsubmit && nonApplicantSpouseInfoForm.countryCode.$invalid && vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState=='WI'}" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Postal Code:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.postalCode"
+                                           ng-pattern='/^[a-zA-Z0-9]*$/'
+                                           maxlength="9"
+                                           name="postalCode"
+                                           class="form-control form-control-sm"
+                                           ng-required="vm.indicators.nonAppSpouseInd == 'Y' && vm.uidata.nonAppOutsideUS == 'Y'"
+                                           ng-class="{req:vm.formsubmit && (nonApplicantSpouseInfoForm.postalCode.$invalid || nonApplicantSpouseInfoForm.postalCode.$error.pattern) && vm.indicators.nonAppSpouseInd == 'Y' && vm.indicators.residentialState=='WI'}" />
+                                    <small ng-show="nonApplicantSpouseInfoForm.postalCode.$error.pattern" class="text-danger">Invalid Postal Code</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                    </div><!-- row -->
+
+                </div><!-- card-block -->
+
+            </div><!-- card -->
+
+        </form>
+    </div><!-- col-xs-12 -->
+</div><!-- row -->
+<!-- Do not Delete Style Tag -->
+<style></style>

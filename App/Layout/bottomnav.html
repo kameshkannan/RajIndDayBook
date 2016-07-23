@@ -1,0 +1,103 @@
+﻿<div class="container-fluid breadcrumb-container" ng-hide="main.isPageDecision">
+    <div class="col-xs-1 breadcrumb text-left">
+        <p class="btn btn-sm btn-success" data-toggle="modal" data-target="#debugModal">Json!</p>
+    </div>
+    <div class="col-xs-11 breadcrumb text-center">
+        <!--Previous Screen Navigations-->
+        <a ng-link="applicant()" ng-click="main.movePrevious()" ng-show="main.currentRoute.routeName =='CoApplicant'" class="btn btn-secondary">Previous</a>
+
+        <a ng-link="applicant()" ng-click="main.movePrevious()" ng-show="main.currentRoute.routeName == 'Product Specific' && main.appViewModel.commonInfo.coAppExists == 'N'" class="btn btn-secondary">Previous</a>
+        <a ng-link="coapplicant()" ng-click="main.movePrevious()" ng-show="main.currentRoute.routeName == 'Product Specific' && main.appViewModel.commonInfo.coAppExists == 'Y'" class="btn btn-secondary">Previous</a>
+
+        <a ng-link="productspecific()" ng-click="main.movePrevious()" ng-show="main.currentRoute.routeName =='Features'" class="btn btn-secondary">Previous</a>
+        <a ng-link="features()" ng-click="main.movePrevious()" ng-show="main.currentRoute.routeName =='Contact Information'" class="btn btn-secondary">Previous</a>
+        <a ng-link="contactinfo()" ng-click="main.movePrevious()" ng-show="main.currentRoute.routeName =='Submit'" class="btn btn-secondary">Previous</a>
+
+        <!--Save Application Button-->
+        <a class="btn btn-wf" data-toggle="modal" data-target="#saveMsgModal">Save Application</a>
+        <a class="btn btn-wf">Cancel Application</a>
+
+        <!--Next Screen Navigations-->
+        <a ng-link="coapplicant()" ng-click="main.moveNext()" ng-show="main.currentRoute.routeName =='Applicant' && main.appViewModel.commonInfo.coAppExists == 'Y'" class="btn btn-secondary">Continue</a>
+        <a ng-link="productspecific()" ng-click="main.moveNext()" ng-show="main.currentRoute.routeName =='Applicant' && main.appViewModel.commonInfo.coAppExists == 'N'" class="btn btn-secondary">Continue</a>
+
+        <a ng-link="productspecific()" ng-click="main.moveNext()" ng-show="main.currentRoute.routeName =='CoApplicant'" class="btn btn-secondary">Continue</a>
+        <a ng-link="features()" ng-click="main.moveNext()" ng-show="main.currentRoute.routeName =='Product Specific'" class="btn btn-secondary">Continue</a>
+        <a ng-link="contactinfo()" ng-click="main.moveNext()" ng-show="main.currentRoute.routeName =='Features'" class="btn btn-secondary">Continue</a>
+        <a ng-link="submit()" ng-click="main.moveNext()" ng-show="main.currentRoute.routeName =='Contact Information'" class="btn btn-secondary">Continue</a>
+        <a ng-link="decision()" ng-click="main.redirectToDecision()" ng-show="main.currentRoute.routeName =='Submit'" class="btn btn-secondary">Submit for Underwriting</a>
+
+
+
+    </div><!-- col-xs-12 -->
+    <!--Model Popup to show Json data-->
+    <div class="modal fade" id="debugModal" tabindex="-1" role="dialog" aria-labelledby="debugModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="debugModalLabel">UiModel Json data</h4>
+                </div>
+                <div class="modal-body">
+                    <b>Session ID:</b> <span style="font-size:smaller">{{main.appViewModel.commonInfo.sessionId}}</span>
+                    <hr />
+                    <b>Current Route:</b> <span style="font-size:smaller">{{main.currentRoute.routeName}}</span>
+                    <hr />
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-header" ng-click="main.toggle = !main.toggle" style="cursor:pointer;">UI View Model Json</div>
+                            <div class="card-block" ng-show="main.toggle">
+                                <b>UiData: </b><pre>{{main.appViewModel | json}}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- myModal -->
+
+    <!--Model Popup to show Json data-->
+    <div class="modal fade" id="saveMsgModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">SAVE APPLICATION</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This application will now close; the application data has been saved.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="main.save()">Ok</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- saveMsgModal -->
+
+    <!--Model Popup to show Interest rate information - Visible when application is ready for submit-->
+    <div class="modal fade" id="interestRateInfo" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    Did the customer indicate they have 6% interest rate, mentions SCRA or has a military job type – exception IL or
+                    OH service members?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="main.openSCRADisclosure()">Yes</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- interestRateInfo -->
+
+
+    <!--Model Popup for SCRA Disclosure -- Visible when application is ready for submit-->
+    <div ng-include src="'./Components/Disclosures/scraDisclosure.html'"></div>
+
+</div><!-- breadcrumb -->

@@ -1,0 +1,128 @@
+﻿<div class="row" ng-init="vm.initializeDirective()">
+
+    <div class="col-xs-12 discovery-container">
+
+        <form name="discoveryForm" novalidate>
+
+            <div class="card">
+
+                <div class="card-header">DISCOVERY</div><!-- card-header -->
+
+                <div class="card-block">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Language Indicator:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.languageIndicator"
+                                            name="languageInd" 
+                                            ng-selected="$first"
+                                            ng-change="vm.showDisclosureByLanguage()"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlLanguage"
+                                            ng-class="{req:vm.formsubmit && discoveryForm.languageInd.$invalid}"
+                                            ng-required="true"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Reg.B Indicator:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.regBIndicator"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlIndicator"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <input type="button"
+                                       value="CoApplicant Search"
+                                       class="btn btn-sm btn-wf"
+                                       data-toggle="modal"
+                                       data-target=".wf-modal-coapp-search"
+                                       data-backdrop="static"
+                                       data-keyboard="false"
+                                       ng-disabled="vm.indicators.disableCoAppSearch" />
+                                <!--<a href="../../Auto/App/Components/CoApplicantSearch/CoAppSearch.html" title="CoApplicant Search (New Window)" target="_blank" class="btn btn-sm btn-wf">CoApplicant Search (Window)</a>-->
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Sales Entity:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.salesEntity"
+                                            name="salesEntity"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlDealer"
+                                            ng-class="{req:vm.formsubmit && discoveryForm.salesEntity.$invalid}"
+                                            ng-required="true"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Source:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.source"
+                                            name="source"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlSource"
+                                            ng-change="vm.evaluateSourceDropDownValue()"
+                                            ng-class="{req:vm.formsubmit && discoveryForm.source.$invalid}"
+                                            ng-required="true"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Sales Rep:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.salesRep"
+                                            ng-disabled="true"
+                                            class="form-control form-control-sm">
+                                        <option value="salesRep" ng-selected="true">{{vm.initialData.salesRepInfo.salesRepName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Reservation Code:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.reservationCode"
+                                            ng-disabled="vm.disableReservationDropdown"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlReservationCode"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                </div><!-- card-block -->
+
+            </div><!-- card -->
+
+        </form>
+
+    </div><!-- col-xs-12 -->
+
+</div><!-- row -->
+                <coapplicant-search search-routes="vm.mainRoutes" indicators="vm.indicators"></coapplicant-search>
+<style></style>

@@ -1,0 +1,474 @@
+﻿<form name="coapplicantsearchForm" ng-init="vm.initializeDirective()" novalidate>
+    <div class="modal fade wf-modal-coapp-search" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="wf-modal-coapp-search-label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.resetSearchParameters()"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="wf-modal-coapp-search-label">Co-Applicant Search Criteria </h4>
+                </div><!-- modal-header -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm12 col-md-12 col-lg-12">
+                            <div class="card">
+                                <div class="card-block">
+                                    <div class="form-group row has-error">
+                                        <label class="control-label col-md-7">Do you have the authority to apply for joint credit on behalf of the co-applicant?</label>
+                                        <div class="col-md-2">
+                                            <select ng-model="vm.uiInputData.jointAuthority"
+                                                    name="jointAuthority"
+                                                    ng-selected="$first"
+                                                    ng-options="type.key as type.value for type in vm.staticData.SelectYesNo"
+                                                    ng-class="{req:vm.formsubmit && coapplicantsearchForm.jointAuthority.$invalid}"
+                                                    ng-required="true"
+                                                    class="form-control form-control-sm wf-coappsearch-authority"></select>
+                                        </div>
+                                    </div><!-- form-group row -->
+                                </div><!-- card-block -->
+                            </div><!-- card -->
+
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 wf-coappsearch-authorize" style="display: none;">
+                                <div class="card card-inverse card-danger text-center">
+                                    <div class="card-block">
+                                        <blockquote class="card-blockquote">
+                                            <h6>Applicant must authorize joint application.</h6>
+                                        </blockquote>
+                                        <div class="form-group row has-error">
+                                            <label class="control-label" style="color: #fff;">Continue with a Single Applicant?</label><br />
+                                            <button type="button" class="btn btn-sm btn-secondary wf-coappsearchauth-yes" data-dismiss="modal">Yes</button>
+                                            <button type="button" class="btn btn-sm btn-secondary wf-coappsearchauth-no">No</button>
+                                        </div><!-- form-group row -->
+                                    </div><!-- card-block -->
+                                </div><!-- card -->
+                            </div><!-- coappsearchauth-container -->
+
+                            <div class="card wf-coappsearch-container" style="display: none;" ng-show="vm.uiInputData.jointAuthority!=''">
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group row">
+                                                <div class="col-xs-12">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="wf-modal-coapp-search-cust-search" id="rdoCoAppSearchCustTin" value="option1" checked="checked" />
+                                                            TIN:
+                                                        </label>
+                                                    </div>
+                                                </div><!-- col-xs-12 -->
+                                            </div><!-- form-group row -->
+                                            <div class="form-group row">
+                                                <label class=" col-xs-12 col-sm-12 col-md-2">Number:</label>
+                                                <div class="col-xs-12 col-sm-12 col-md-10">
+                                                    <input type="text" class="form-control form-control-sm coapp-search-cust-search-tin" aria-label="TIN" ng-model="vm.uiInputData.tin" />
+                                                </div>
+                                            </div><!-- form-group row -->
+                                        </div><!-- col-xs-12 col-sm-6 col-md-6 col-lg-6 -->
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="border-left: solid 1px #E5E5E5;">
+                                            <div class="form-group row">
+                                                <div class="col-xs-12">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="wf-modal-coapp-search-cust-search" id="rdoCoAppSearchCustName" value="option1" />
+                                                            Customer Name:
+                                                        </label>
+                                                    </div>
+                                                </div><!-- col-xs-12 -->
+                                            </div><!-- form-group row -->
+                                            <div class="form-group row">
+                                                <label class=" col-xs-12 col-sm-12 col-md-2">First:</label>
+                                                <div class="col-xs-12 col-sm-12 col-md-10">
+                                                    <input type="text" class="form-control form-control-sm coapp-search-cust-search-first" aria-label="First name" ng-model="vm.uiInputData.serachfirstname" />
+                                                </div>
+                                            </div><!-- form-group row -->
+                                            <div class="form-group row">
+                                                <label class=" col-xs-12 col-sm-12 col-md-2">Last:</label>
+                                                <div class="col-xs-12 col-sm-12 col-md-10">
+                                                    <input type="text" class="form-control form-control-sm coapp-search-cust-search-last" aria-label="Last name" ng-model="vm.uiInputData.serachlastname" />
+                                                </div>
+                                            </div><!-- form-group row -->
+                                            <div class="form-group row">
+                                                <label class="col-xs-12 col-sm-12 col-md-2">M.I:</label>
+                                                <div class="col-xs-12 col-sm-12 col-md-10">
+                                                    <input type="text" class="form-control form-control-sm coapp-search-cust-search-mi" aria-label="Middle Initial" ng-model="vm.uiInputData.serachlmiddleinitial" />
+                                                </div>
+                                            </div><!-- form-group row -->
+                                            <div class="form-group row">
+                                                <label class=" col-xs-12 col-sm-12 col-md-2">Suffix:</label>
+                                                <div class=" col-xs-12 col-sm-12 col-md-10">
+                                                    <input type="text" class="form-control form-control-sm coapp-search-cust-search-suffix" aria-label="Suffix" ng-model="vm.uiInputData.serachsuffix" />
+                                                </div>
+                                            </div><!-- form-group row -->
+                                        </div><!-- col-xs-12 col-sm-6 col-md-6 col-lg-6 -->
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                                            <hr />
+                                            <button type="button" class="btn btn-sm btn-wf wf-coappsearch-search" ng-click="vm.searchCustomer();">Search</button>
+                                            <button type="button" class="btn btn-sm btn-wf wf-coappsearch-reset" ng-click="vm.resetSearchParameters()">Reset</button>
+                                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#resultModel">Json!</button>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 wf-modal-coapp-search-results" style="display: none;">
+                                            <hr />
+                                            <p class="text-right">
+                                                <button type="button" class="btn btn-sm btn-wf wf-coappsearch-newcustomer">New Customer</button>
+                                            </p>
+                                            <table class="table table-sm table-condensed table-bordered wf-modal-coapp-search-results-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Name</th>
+                                                        <th>Address</th>
+                                                        <th>TIN/SSN</th>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="profile in vm.uidata | paginate:vm.rowsPerPage">
+                                                        <td>{{profile.applicantProfile.Type}}</td>
+                                                        <td><a data-toggle="modal" data-target=".wf-modal-coapp-summary" ng-click="vm.getCustomerInfo(profile.applicantProfile.ECN)">{{profile.applicantProfile.Name}} <span class="fa fa-external-link"></span></a></td>
+                                                        <td>{{profile.applicantProfile.AddressLine + "," + profile.applicantProfile.AddressLine + "," + profile.applicantProfile.AddressState + "," + profile.applicantProfile.AddressZip}}</td>
+                                                        <td>{{profile.applicantProfile.SSN}}</td>
+                                                        <td><a data-toggle="modal" data-target=".wf-modal-coapp-summary" ng-click="vm.selectCustomerInfo(profile.applicantProfile.ECN)" class="btn btn-sm btn-secondary">CoAppliant <span class="fa fa-angle-right"></span></a></td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="active">
+                                                        <td colspan="5">
+                                                            <paginator></paginator>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div><!-- col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
+                                    </div><!-- row -->
+                                </div><!-- card-block -->
+                            </div><!-- card -->
+
+                            <script type="text/javascript">
+                                function resetEverything() {
+
+                                    $('.wf-modal-coapp-search .wf-coappsearch-authorize').hide();
+                                    $('.wf-modal-coapp-search .wf-coappsearch-container').hide();
+                                    $('.wf-modal-coapp-search .wf-modal-coapp-search-results').hide();
+                                    $('.wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-first').val('');
+                                    $('.wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-last').val('');
+                                    $('.wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-mi').val('');
+                                    $('.wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-suffix').val('');
+                                    $('.wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-tin').val('');
+                                }
+
+                                $(function () {
+                                    //CoApp Reset All Panels First
+                                    resetEverything();
+
+                                    //CoApp Search Box Setup
+                                    $('.wf-modal-coapp-search .wf-coappsearch-authority').on('change', function () {
+
+                                        switch ($(this).find('option:selected').text()) {
+                                            case 'Select':
+                                                $('.wf-modal-coapp-search .wf-coappsearch-container').slideUp();
+                                                $('.wf-modal-coapp-search .wf-coappsearch-authorize').slideUp();
+                                                $('.wf-modal-coapp-search-results').hide();
+
+                                                break;
+                                            case 'Yes':
+                                                $('.wf-modal-coapp-search .wf-coappsearch-container').slideDown();
+                                                $('.wf-modal-coapp-search .wf-coappsearch-authorize').slideUp();
+                                                $('.wf-modal-coapp-search-results').hide();
+                                                break;
+                                            case 'No':
+                                                $('.wf-modal-coapp-search .wf-coappsearch-container').slideUp();
+                                                $('.wf-modal-coapp-search .wf-coappsearch-authorize').slideDown();
+                                                $('.wf-modal-coapp-search-results').hide();
+                                                break;
+                                        };
+                                    });
+                                    $('.wf-modal-coapp-search  .wf-coappsearch-no').click(function () {
+                                        $('.wf-modal-coapp-search .wf-coappsearch-authority').val('string:Y');
+                                        $('.wf-modal-coapp-search .wf-coappsearch-container').slideDown();
+                                        $('.wf-modal-coapp-search .wf-coappsearch-authorize').slideUp();
+                                    });
+                                    //CoApp Search Show Results
+                                    $('.wf-modal-coapp-search .wf-coappsearch-search').click(function () {
+                                        $('.wf-modal-coapp-search .wf-modal-coapp-search-results').slideDown();
+                                    });
+
+
+                                    //CoApp Search Button Resets
+                                    $('.wf-modal-coapp-search .wf-coappsearch-reset, .wf-modal-coapp-search .wf-coappsearch-searchagain, .wf-modal-coapp-search .wf-coappsearch-newcustomer').click(function () {
+                                        resetEverything();
+                                    });
+
+                                    //CoApp Authority Buttons
+                                    $('.wf-modal-coapp-search .wf-coappsearchauth-yes').click(function () {
+                                        window.close();
+                                    });
+                                    $('.wf-coappsearchauth-no').click(function () {
+                                        $('.wf-modal-coapp-search .wf-coappsearch-authorize').slideUp();
+                                        $('.wf-modal-coapp-search .wf-coappsearch-container').slideDown();
+                                        $('.wf-modal-coapp-search .wf-coappsearch-authority').val('string:Y');
+                                    });
+
+                                    //CoApp Search Tin Auto-Set
+                                    $('.wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-tin').click(function () {
+                                        $('.wf-modal-coapp-search .wf-coappsearch-container #rdoCoAppSearchCustTin').prop('checked', true);
+                                    });
+
+                                    //CoApp Search Customer Auto-Set
+                                    $('.wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-first, wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-last, .wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-mi, wf-modal-coapp-search .wf-coappsearch-container .coapp-search-cust-search-suffix').click(function () {
+                                        $('.wf-modal-coapp-search .wf-coappsearch-container #rdoCoAppSearchCustName').prop('checked', true);
+                                    });
+                                });
+                            </script>
+                        </div><!-- col-xs-12 col-sm12 col-md-12 col-lg-12 -->
+                    </div><!-- row -->
+                </div><!-- modal-body -->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <div class="modal fade wf-modal-coapp-summary" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="wf-modal-coapp-summary-label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="border: 5px solid #ff8900;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="wf-modal-coapp-summary-label">Test Test Summary</h4>
+                </div><!-- modal-header -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <style type="text/css">
+                                .wf-modal-coapp-summary .modal-body .form-group.row {
+                                    margin-bottom: 0;
+                                }
+
+                                    .wf-modal-coapp-summary .modal-body .form-group.row .form-control-static {
+                                        min-height: 1rem;
+                                        line-height: 1rem;
+                                        font-weight: bold;
+                                    }
+
+                                    .wf-modal-coapp-summary .modal-body .form-group.row .form-control-label {
+                                        line-height: 1rem;
+                                    }
+                            </style>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-target="#applicant" role="tab" data-toggle="tab">Applicant</a>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-target="#account" role="tab" data-toggle="tab">Accounts</a>
+                                </li>
+                            </ul><!-- nav-tabs -->
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="applicant">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h6>Profile</h6>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 form-control-label form-control-sm text-right">Email: </label>
+                                                        <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.contactInfo.email}}</p></div>
+                                                    </div><!-- form-group row -->
+                                                </div><!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 form-control-label form-control-sm text-right">SSN: </label>
+                                                        <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.appPersonalInfo.ssn}}</p></div>
+                                                    </div><!-- form-group row -->
+                                                </div><!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 form-control-label form-control-sm text-right">Date Of Birth: </label>
+                                                        <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.appPersonalInfo.dob}}</p></div>
+                                                    </div><!-- form-group row -->
+                                                </div><!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 form-control-label form-control-sm text-right">Address: </label>
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static form-control-sm">
+                                                                {{vm.coApplicantInfo.residentialAddress.streetAddress + "," + vm.coApplicantInfo.residentialAddress.city + "," + vm.coApplicantInfo.residentialAddress.state + "," + vm.coApplicantInfo.residentialAddress.zip}}
+                                                            </p>
+                                                        </div>
+                                                    </div><!-- form-group row -->
+                                                </div><!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 form-control-label form-control-sm text-right">Country: </label>
+                                                        <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.coAppSearchProfileInfo.country}}</p></div>
+                                                    </div><!-- form-group row -->
+                                                </div><!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 form-control-label form-control-sm text-right">Customer Since: </label>
+                                                        <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.coAppSearchProfileInfo.customerSince}}</p></div>
+                                                    </div><!-- form-group row -->
+                                                </div><!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 form-control-label form-control-sm text-right">Residence Since: </label>
+                                                        <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.coAppSearchProfileInfo.residenceSince}}</p></div>
+                                                    </div><!-- form-group row -->
+                                                </div><!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 form-control-label form-control-sm text-right">Customer Status: </label>
+                                                        <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.coAppSearchProfileInfo.customerStatus}}</p></div>
+                                                    </div><!-- form-group row -->
+                                                </div><!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 form-control-label form-control-sm text-right">Primary ID / Description: </label>
+                                                        <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.coAppSearchProfileInfo.primaryID}}</p></div>
+                                                    </div><!-- form-group row -->
+                                                </div><!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+
+                                            </div><!-- row -->
+
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <h6>Contact Information</h6>
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Solicitation: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.coAppSearchProfileInfo.solicitation}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Internet Access Ind: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm"></p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Language Pref: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.coAppSearchProfileInfo.preferredLang}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Special Comms Needs: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm"></p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Phone: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm"></p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Pref Phone: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.contactInfo.homePhone}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Home: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.contactInfo.homePhone}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Business: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.contactInfo.workPhone}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Best Time to Call: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.coAppSearchProfileInfo.bestTimeToCall}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <!--<div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Email: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.contactInfo.email}}</p></div>
+                                                        </div>-->
+                                                        <!-- form-group row -->
+
+                                                    </div><!-- col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
+                                                </div><!--col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <h6>Employment Information</h6>
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Employer: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.employmentInfo.employer}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">WF Employee: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.contactInfo.email}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Since: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.coAppSearchProfileInfo.employeeSince}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Occupation: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.employmentInfo.empType}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Job Title: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.coApplicantInfo.employmentInfo.title}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Primary Monthly Gross Income: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.grossIncome}}</p></div>
+                                                        </div><!-- form-group row -->
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 form-control-label form-control-sm text-right">Additional Monthly Income: </label>
+                                                            <div class="col-sm-8"><p class="form-control-static form-control-sm">{{vm.additionalIncome}}</p></div>
+                                                        </div><!-- form-group row -->
+
+                                                    </div><!-- col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
+                                                </div><!--col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+                                            </div><!-- row -->
+                                        </div><!-- col-xs-12 -->
+                                    </div><!-- row -->
+                                </div><!-- tab-pane -->
+                                <div role="tabpanel" class="tab-pane fade" id="account">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h5>Accounts</h5>
+                                            <table class="table table-sm table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Bank</th>
+                                                        <th>Account</th>
+                                                        <th>Ledger Balance</th>
+                                                        <th>As Of Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="acct in vm.coApplicantInfoAcctInfo">
+                                                        <td>{{acct.product}}</td>
+                                                        <td>{{acct.bank}}</td>
+                                                        <td>{{acct.accountNumber}}</td>
+                                                        <td>{{acct.ledgerBalance}}</td>
+                                                        <td>{{acct.contractDate}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!-- col-xs-12 -->
+                                    </div><!-- row -->
+                                </div><!-- tab-pane -->
+                            </div><!-- tab-content -->
+
+                        </div><!-- col-xs-12 col-sm12 col-md-12 col-lg-12 -->
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 wf-coapp-summary-cta text-right">
+                            <hr />
+                            <a ng-href="/applicant" data-dismiss="modal" class="btn btn-sm btn-wf wf-coapp-summary-cta-continue" ng-show="vm.showContinue" ng-click="vm.selectcoapplicant()">Continue</a>
+                        </div><!-- col-xs-12 col-sm12 col-md-12 col-lg-12 -->
+                    </div><!-- row -->
+                </div><!-- modal-body -->
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-sm btn-wf" data-dismiss="modal" aria-label="Close">Close</button>
+                </div><!-- modal-footer-->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <!--Model Popup to show Json data Temporary only...Remove it once integration is done-->
+    <div class="modal fade" id="resultModel" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">UiModel Json data</h4>
+                </div><!-- modal-header -->
+                <div class="modal-body">
+                    <pre>UiData: {{vm.coApplicantInfo | json}}</pre>
+                </div><!-- modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div><!-- modal-footer-->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+</form>

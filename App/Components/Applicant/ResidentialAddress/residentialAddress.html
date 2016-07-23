@@ -1,0 +1,229 @@
+﻿<div class="row">
+
+    <div class="col-xs-12 residentialaddress-container">
+
+        <form name="residentialAddressForm" ng-init="vm.initializeDirective()" novalidate>
+
+            <div class="card">
+
+                <div class="card-header">RESIDENTIAL ADDRESS</div><!-- card-header -->
+
+                <div class="card-block">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Type:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.type"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlAddressType"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Street Address:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.streetAddress"
+                                           name="streetAddress"
+                                           ng-pattern='/^[0-9a-zA-Z.# _\/-]+$/'
+                                           maxlength="32"
+                                           ng-class="{req:vm.formsubmit && (residentialAddressForm.streetAddress.$invalid || residentialAddressForm.streetAddress.$error.pattern)}"
+                                           ng-required="true"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="residentialAddressForm.streetAddress.$error.pattern" class="text-danger">
+                                        Invalid Street Address
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Apt#:</label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="vm.uidata.aptNumber" maxlength="5" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">City:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.city"
+                                           name="city"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="20"
+                                           ng-class="{req:vm.formsubmit && (residentialAddressForm.city.$invalid || residentialAddressForm.city.$error.pattern)}"
+                                           ng-required="true"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="residentialAddressForm.city.$error.pattern" class="text-danger">
+                                        Invalid City
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">State:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.state"
+                                            name="state"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlState"
+                                            ng-class="{req:vm.formsubmit && residentialAddressForm.state.$invalid}"
+                                            ng-required="true"
+                                            class="form-control form-control-sm"
+                                            ng-change="vm.onStateChanged()" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Zip:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.zip"
+                                           name="zip"
+                                           ng-pattern='/^[0-9]{4,9}$/'
+                                           maxlength="9"
+                                           ng-class="{req:vm.formsubmit && (residentialAddressForm.zip.$invalid || residentialAddressForm.zip.$error.pattern)}"
+                                           ng-required="true"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="residentialAddressForm.zip.$error.pattern" class="text-danger">
+                                        Invalid zip
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield"> Time at Address:</label>
+                                <div class="col-md-7">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text"
+                                               ng-model="vm.uidata.timeAtAddress.years"
+                                               name="years"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               ng-change="vm.showHidepreviousAddressPanel()"
+                                               maxlength="2"
+                                               ng-class="{req:vm.formsubmit && (residentialAddressForm.years.$invalid || residentialAddressForm.years.$error.pattern)}"
+                                               ng-required="true"
+                                               class="form-control"
+                                               placeholder="0" />
+                                        <span class="input-group-addon">Y</span>
+                                        <input type="text"
+                                               ng-model="vm.uidata.timeAtAddress.months"
+                                               name="months"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               ng-change="vm.showHidepreviousAddressPanel()"
+                                               maxlength="2"
+                                               ng-class="{req:vm.formsubmit && (residentialAddressForm.months.$invalid || residentialAddressForm.months.$error.pattern)}"
+                                               ng-required="true"
+                                               class="form-control"
+                                               placeholder="0" />
+                                        <span class="input-group-addon">M</span>
+                                    </div>
+                                    <small ng-show="residentialAddressForm.years.$error.pattern" class="text-danger">
+                                        Invalid years
+                                    </small>
+                                    <small ng-show="residentialAddressForm.months.$error.pattern" class="text-danger">
+                                        Invalid months
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Monthly Rent:</label>
+                                <div class="col-md-7">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text"
+                                               ng-model="vm.uidata.monthlyRent"
+                                               name="monthlyRent"
+                                               ng-pattern='/^\d+((\d{2}))?$/'
+                                               maxlength="9"
+                                               ng-class="{req:vm.formsubmit && (residentialAddressForm.monthlyRent.$invalid || residentialAddressForm.monthlyRent.$error.pattern)}"
+                                               ng-required="true"
+                                               class="form-control" placeholder="0" />
+                                    </div>
+                                    <small ng-show="residentialAddressForm.monthlyRent.$error.pattern" class="text-danger">
+                                        Invalid Amount
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Home Value:</label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="vm.uidata.homeValue" ng-disabled="vm.uidata.addressType!='O'" maxlength="20" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+                    <!-- Visible when State selected is Wisconsin -->
+                    <div class="row" ng-show="vm.uidata.state == 'WI'">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 reqfield">
+                                    Does Applicant have a non-applicant spouse
+                                </label>
+                                <div class="col-md-2">
+                                    <!-- If Yes than display Non-Applicant Spouse Information Panel -->
+                                    <select ng-model="vm.applicantData.nonAppSpouseInd"
+                                            name="nonAppSpouseInd"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.SelectYesOrNo"
+                                            ng-class="{req: vm.formsubmit  && residentialAddressForm.nonAppSpouseInd.$invalid && vm.uidata.state == 'WI'}"
+                                            ng-change="vm.setIndicator()"
+                                            ng-required="vm.uidata.state == 'WI'"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div><!-- row -->
+                        </div><!-- col-xs-12 col-sm-12 col-md-12 -->
+                    </div><!-- row -->
+
+                </div><!-- card-block -->
+            </div>
+        </form>
+
+        <div class="card">
+
+            <div class="card-block">
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-md-7">Different Mailing Address:</label>
+                            <div class="col-md-5">
+                                <select ng-model="vm.applicantData.differentMailingAddressInd"
+                                        ng-selected="$first"
+                                        name="differentMailingAddressInd"
+                                        ng-options="type.key as type.value for type in vm.staticData.SelectYesNo"
+                                        class="form-control form-control-sm"
+                                        ng-change="vm.differentMailingAddress()" />
+                            </div>
+                        </div>
+                    </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                </div><!-- row -->
+
+            </div><!-- card-block -->
+
+        </div><!-- card -->
+
+    </div><!-- col-xs-12 -->
+
+</div><!-- row -->
+<!-- Do not Delete Style Tag -->
+<style></style>

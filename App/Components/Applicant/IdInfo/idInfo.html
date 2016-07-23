@@ -1,0 +1,93 @@
+﻿<div class="row">
+
+    <div class="col-xs-12 idinfo-container">
+
+        <form name="idInfoForm" ng-init="vm.initializeDirective()" novalidate>
+
+            <div class="card">
+
+                <div class="card-header">ID INFORMATION</div><!-- card-header -->
+
+                <div class="card-block">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Photo ID type:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.photoIdType"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlPhotoIdType"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">ID#:</label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="vm.uidata.idNumber" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">ID State:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.idState"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlState"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Issue Date:</label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="vm.uidata.issueDate"
+                                           name="issueDate"
+                                           ng-pattern="/^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(19|20)\d{2}$/"
+                                           ng-class="{req:vm.formsubmit && idInfoForm.issueDate.$error.pattern}"
+                                           ng-blur="vm.validateDate(vm.uidata.issueDate)"
+                                           class="form-control form-control-sm" />
+                                    <small class="text-muted">(mmddyyyy)</small>
+                                    <small ng-show="!vm.isValidDateInd && idInfoForm.issueDate.$error.pattern" class="text-danger">Invalid Date</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Expiration Date:</label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="vm.uidata.expirationDate"
+                                           name="expirationDate"
+                                           ng-pattern="/^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(19|20)\d{2}$/"
+                                           ng-class="{req:vm.formsubmit && idInfoForm.expirationDate.$error.pattern}"
+                                           ng-blur="vm.validateDate(vm.uidata.expirationDate)"
+                                           class="form-control form-control-sm" />
+                                    <small class="text-muted">(mmddyyyy)</small>
+                                    <small ng-show="!vm.isValidDateInd && idInfoForm.expirationDate.$error.pattern" class="text-danger">Invalid Date</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+    
+                    </div><!-- row -->
+
+                </div><!-- card-block -->
+
+            </div><!-- card -->
+
+        </form>
+
+    </div><!-- col-xs-12 -->
+
+</div><!-- row -->
+<!-- Do not Delete Style Tag -->
+<style></style>

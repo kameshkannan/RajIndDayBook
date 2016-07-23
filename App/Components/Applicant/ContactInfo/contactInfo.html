@@ -1,0 +1,100 @@
+﻿<div class="row">
+
+    <div class="col-xs-12 contactinfo-container">
+
+        <form name="contactInfoForm" ng-init="vm.initializeDirective()" novalidate>
+
+            <div class="card">
+
+                <div class="card-header">CONTACT INFORMATION</div><!-- card-header -->
+
+                <div class="card-block">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Home Phone:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.homePhone"
+                                           name="homePhone"
+                                           ng-class="{req: vm.formsubmit && ((contactInfoForm.cellPhone.$invalid && contactInfoForm.homePhone.$invalid && contactInfoForm.workPhone.$invalid) || contactInfoForm.homePhone.$error.pattern)}"
+                                           ng-pattern='/^[0-9]{10}$/'
+                                           maxlength="10"                                           
+                                           ng-required="vm.uidata.homePhone == '' && vm.uidata.cellPhone == '' && vm.uidata.workPhone == ''"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="contactInfoForm.homePhone.$error.pattern" class="text-danger">
+                                        Invalid Home Phone
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Cell Phone:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.cellPhone"
+                                           name="cellPhone"                                           
+                                           ng-class="{req: vm.formsubmit && ((contactInfoForm.cellPhone.$invalid && contactInfoForm.homePhone.$invalid && contactInfoForm.workPhone.$invalid) || contactInfoForm.cellPhone.$error.pattern)}"
+                                           ng-pattern='/^[0-9]{10}$/'
+                                           maxlength="10"
+                                           ng-required="vm.uidata.homePhone == '' && vm.uidata.cellPhone == '' && vm.uidata.workPhone == ''"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="contactInfoForm.cellPhone.$error.pattern" class="text-danger">
+                                        Invalid Cell Phone
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+
+                                <label class="col-md-5 reqfield">Work Phone:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.workPhone"
+                                           name="workPhone"
+                                           ng-class="{req: vm.formsubmit && ((contactInfoForm.cellPhone.$invalid && contactInfoForm.homePhone.$invalid && contactInfoForm.workPhone.$invalid) || contactInfoForm.workPhone.$error.pattern)}"
+                                           ng-pattern='/^[0-9]{10}$/'
+                                           maxlength="10"
+                                           ng-required="vm.uidata.homePhone == '' && vm.uidata.cellPhone == '' && vm.uidata.workPhone == ''"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="contactInfoForm.workPhone.$error.pattern" class="text-danger">
+                                        Invalid Work Phone
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Email:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.email"
+                                           ng-pattern="/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*$/"
+                                           maxlength="40"
+                                           name="email"
+                                           ng-blur="vm.showDisclosure(vm.uidata.email)"
+                                           ng-class="{req:vm.formsubmit && contactInfoForm.email.$error.pattern}"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="contactInfoForm.email.$error.pattern" class="text-danger">
+                                        Invalid Email
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                </div><!-- card-block -->
+
+            </div><!-- card -->
+        
+        </form>
+    </div>
+</div>
+<!-- Do not Delete Style Tag -->
+<style></style>

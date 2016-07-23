@@ -1,0 +1,210 @@
+﻿
+<!--Model Popup for SCRA Disclosure - Visible when Employment type is "MILITARY"-->
+<div ng-include src="'./Components/Disclosures/scraDisclosure.html'"></div>
+
+<div class="row">
+    
+    <div class="col-xs-12 employmentinfo-container">
+
+        <form name="employmentInfoForm" ng-init="vm.initializeDirective()" novalidate>
+
+            <div class="card">
+
+                <div class="card-header">EMPLOYMENT INFORMATION</div><!-- card-header -->
+
+                <div class="card-block">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Emp.Type:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.empType"
+                                            name="empType"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlEmploymentStatus"
+                                            ng-class="{req:vm.formsubmit && employmentInfoForm.empType.$invalid}"
+                                            ng-change="vm.openDisclosure()"
+                                            ng-required="true"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Employer:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.employer"
+                                           name="employer"
+                                           maxlength="30"
+                                           ng-class="{req:vm.formsubmit && employmentInfoForm.employer.$invalid}"
+                                           ng-required="true"
+                                           class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Title/Rank:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.title"
+                                           name="title"
+                                           maxlength="26"
+                                           ng-class="{req:vm.formsubmit && employmentInfoForm.title.$invalid}"
+                                           ng-required="true"
+                                           class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">City:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.city"
+                                           name="city"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="20"
+                                           ng-class="{req:vm.formsubmit && employmentInfoForm.city.$error.pattern}"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="employmentInfoForm.city.$error.pattern" class="text-danger">
+                                        Invalid City
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">State:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.state"
+                                            ng-selected="$first"
+                                            name="state"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlState"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Employment:</label>
+                                <div class="col-md-7">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text"
+                                               ng-model="vm.uidata.employmentPeriod.years"
+                                               name="employmentPeriodyears"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               ng-change="vm.showHidePreviousEmploymentPanel()"
+                                               maxlength="2"
+                                               ng-class="{req:vm.formsubmit && (employmentInfoForm.employmentPeriodyears.$invalid || employmentInfoForm.employmentPeriodyears.$error.pattern)}"
+                                               ng-required="true"
+                                               class="form-control" />
+                                        <span class="input-group-addon">Y</span>
+                                        <input type="text"
+                                               ng-model="vm.uidata.employmentPeriod.months"
+                                               name="employmentPeriodmonths"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               maxlength="2"
+                                               ng-change="vm.showHidePreviousEmploymentPanel()"
+                                               ng-class="{req:vm.formsubmit && (employmentInfoForm.employmentPeriodmonths.$invalid || employmentInfoForm.employmentPeriodmonths.$error.pattern)}"
+                                               ng-required="true"
+                                               class="form-control" />
+                                        <span class="input-group-addon">M</span>
+                                    </div>
+                                    <small ng-show="employmentInfoForm.employmentPeriodyears.$error.pattern" class="text-danger">
+                                        Invalid years
+                                    </small>
+                                    <small ng-show="pemploymentInfoForm.employmentPeriodmonths.$error.pattern" class="text-danger">
+                                        Invalid months
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5 reqfield">Time in Profession:</label>
+                                <div class="col-md-7">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text"
+                                               ng-model="vm.uidata.professionPeriod.years"
+                                               name="professionPeriodyears"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               maxlength="2"
+                                               ng-class="{req:vm.formsubmit && (employmentInfoForm.professionPeriodyears.$invalid || employmentInfoForm.professionPeriodyears.$error.pattern)}"
+                                               ng-required="true"
+                                               class="form-control" />
+                                        <span class="input-group-addon">Y</span>
+                                        <input type="text"
+                                               ng-model="vm.uidata.professionPeriod.months"
+                                               name="professionPeriodmonths"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               maxlength="2"
+                                               ng-class="{req:vm.formsubmit && (employmentInfoForm.professionPeriodmonths.$invalid || employmentInfoForm.professionPeriodmonths.$error.pattern)}"
+                                               ng-required="true"
+                                               class="form-control" />
+                                        <span class="input-group-addon">M</span>
+                                    </div>
+                                    <small ng-show="employmentInfoForm.professionPeriodyears.$error.pattern" class="text-danger">
+                                        Invalid years
+                                    </small>
+                                    <small ng-show="employmentInfoForm.professionPeriodmonths.$error.pattern" class="text-danger">
+                                        Invalid months
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Self Employed Profession:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.selfEmployedProfession"
+                                            name="selfEmployedProfession"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlSEProff"
+                                            ng-class="{req:vm.formsubmit && vm.uidata.empType=='MGBS' && employmentInfoForm.selfEmployedProfession.$invalid}"
+                                            ng-required="vm.uidata.empType=='MGBS'"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Self Employed Business Type:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.selfEmployedBusinessType"
+                                            name="selfEmployedBusinessType"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlEmpBsn"
+                                            ng-class="{req:vm.formsubmit && vm.uidata.empType=='MGBS' && employmentInfoForm.selfEmployedBusinessType.$invalid}"
+                                            ng-required="vm.uidata.empType=='MGBS'"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                </div><!-- card-block -->
+
+            </div><!-- card -->
+
+        </form>
+
+    </div><!-- col-xs-12 -->
+
+</div><!-- row -->
+<!-- Do not Delete Style Tag -->
+<style></style>

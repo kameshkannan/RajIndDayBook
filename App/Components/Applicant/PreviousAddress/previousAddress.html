@@ -1,0 +1,191 @@
+﻿<div class="row">
+
+    <div class="col-xs-12 previousaddress-container">
+
+        <form name="previousAddressForm" ng-init="vm.initializeDirective()" novalidate>
+
+            <div class="card">
+
+                <div class="card-header" ng-click="vm.toggle = !vm.toggle" style="cursor:pointer;">PREVIOUS ADDRESS (IF LESS THAN 2 YEARS)</div><!-- card-header -->
+
+                <div class="card-block" ng-show="vm.indicators.showPreviousAddress || vm.toggle">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Type:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.addressType"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlAddressType"
+                                            ng-disabled="!vm.indicators.showPreviousAddress"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield:vm.indicators.showPreviousAddress}">Street Address:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.streetAddress"
+                                           name="streetAddress"
+                                           maxlength="32"
+                                           ng-pattern='/^[0-9a-zA-Z.# _\/-]+$/'
+                                           ng-disabled="!vm.indicators.showPreviousAddress"
+                                           ng-class="{req:vm.formsubmit && (previousAddressForm.streetAddress.$invalid || previousAddressForm.streetAddress.$error.pattern) && vm.indicators.showPreviousAddress}"
+                                           ng-required="vm.indicators.showPreviousAddress"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="previousAddressForm.streetAddress.$error.pattern" class="text-danger">
+                                        Invalid Street Address
+                                    </small>
+                                 </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Apt#:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.aptNumber"
+                                           maxlength="5"
+                                           ng-disabled="!vm.indicators.showPreviousAddress"
+                                           class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield : vm.indicators.showPreviousAddress}">City:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.city"
+                                           name="city"
+                                           ng-disabled="!vm.indicators.showPreviousAddress"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="20"
+                                           ng-class="{req:vm.formsubmit && (previousAddressForm.city.$invalid || previousAddressForm.city.$error.pattern) && vm.indicators.showPreviousAddress}"
+                                           ng-required="vm.indicators.showPreviousAddress"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="previousAddressForm.city.$error.pattern" class="text-danger">Invalid City</small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield: vm.indicators.showPreviousAddress}">State:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.state"
+                                            name="state"
+                                            ng-disabled="!vm.indicators.showPreviousAddress"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlState"
+                                            ng-class="{req:vm.formsubmit && previousAddressForm.state.$invalid && vm.indicators.showPreviousAddress}"
+                                            ng-required="vm.indicators.showPreviousAddress"
+                                            class="form-control form-control-sm" />                                    
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield: vm.indicators.showPreviousAddress}">Zip:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.zip"
+                                           name="zip"
+                                           ng-pattern='/^[0-9]{4,9}$/'
+                                           maxlength="9"
+                                           ng-class="{req:vm.formsubmit && (previousAddressForm.zip.$invalid || previousAddressForm.zip.$error.pattern) && vm.indicators.showPreviousAddress}"
+                                           ng-disabled="!vm.indicators.showPreviousAddress"
+                                           ng-required="vm.indicators.showPreviousAddress"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="previousAddressForm.zip.$error.pattern" class="text-danger">
+                                        Invalid Zip
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield: vm.indicators.showPreviousAddress}">Time at Address:</label>
+                                <div class="col-md-7">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text"
+                                               ng-model="vm.uidata.years"
+                                               name="years"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               maxlength="2"
+                                               ng-class="{req:vm.formsubmit && (previousAddressForm.years.$invalid || previousAddressForm.years.$error.pattern) && vm.indicators.showPreviousAddress}"
+                                               ng-disabled="!vm.indicators.showPreviousAddress"
+                                               ng-required="vm.indicators.showPreviousAddress"
+                                               class="form-control"
+                                               placeholder="0" />
+                                        <span class="input-group-addon">Y</span>
+                                        <input type="text"
+                                               ng-model="vm.uidata.months"
+                                               name="months"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               maxlength="2"
+                                               ng-class="{req:vm.formsubmit && (previousAddressForm.months.$invalid || previousAddressForm.months.$error.pattern) && vm.indicators.showPreviousAddress}"
+                                               ng-disabled="!vm.indicators.showPreviousAddress"
+                                               ng-required="vm.indicators.showPreviousAddress"
+                                               class="form-control"
+                                               placeholder="0" />
+                                        <span class="input-group-addon">M</span>
+                                    </div>
+                                    <small ng-show="previousAddressForm.years.$error.pattern" class="text-danger">
+                                        Invalid years
+                                    </small>
+                                    <small ng-show="previousAddressForm.months.$error.pattern" class="text-danger">
+                                        Invalid months
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">Monthly Rent:</label>
+                                <div class="col-md-7">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text"
+                                               ng-model="vm.uidata.monthlyRent"
+                                               name="monthlyRent"
+                                               ng-pattern='/^\d+((\d{2}))?$/'
+                                               maxlength="9"
+                                               ng-class="{req:vm.formsubmit && (previousAddressForm.monthlyRent.$invalid || previousAddressForm.monthlyRent.$error.pattern) && vm.indicators.showPreviousAddress}"
+                                               ng-disabled="!vm.indicators.showPreviousAddress"
+                                               ng-required="vm.indicators.showPreviousAddress"
+                                               class="form-control"
+                                               placeholder="0" />
+                                    </div>
+                                    <small ng-show="previousAddressForm.monthlyRent.$error.pattern" class="text-danger">
+                                        Invalid Amount
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                    </div><!-- row -->
+                </div><!-- card-block -->
+
+            </div><!-- card -->
+
+        </form>
+
+    </div><!-- col-xs-12 -->
+
+</div><!-- row -->
+<!-- Do not Delete Style Tag -->
+<style></style>

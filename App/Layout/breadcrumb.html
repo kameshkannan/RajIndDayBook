@@ -1,0 +1,11 @@
+﻿<div class="container-fluid breadcrumb-container">
+    <ol class="breadcrumb">
+        <li ng-repeat="route in main.navigation">
+            <a ng-link="{{route.routeValue}}">{{route.routeName}}</a>
+        </li>
+        <li>
+            <disclosure uidata="main.disclosures"></disclosure>
+            <button type="button" class="btn btn-wf btn-sm" ng-click="main.openDisclosure()">disclosures</button>
+        </li>
+    </ol>
+</div><!-- breadcrumb -->

@@ -1,0 +1,124 @@
+﻿<div class="row">
+
+    <div class="col-xs-12 previousemploymentincome-container">
+
+        <form name="previousEmploymentInfoForm" ng-init="vm.initializeDirective()" novalidate>
+
+            <div class="card">
+
+                <div class="card-header" ng-click="vm.toggle = !vm.toggle" style="cursor:pointer;">PREVIOUS EMPLOYMENT INFORMATION (IF LESS THAN 2 YEARS)</div><!-- card-header -->
+
+                <div class="card-block" ng-show="vm.indicators.showPreviousEmployment || vm.toggle">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield:vm.indicators.showPreviousEmployment}">Employer:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.employer"
+                                           name="employer"
+                                           maxlength="30"
+                                           ng-class="{req:vm.formsubmit && previousEmploymentInfoForm.employer.$invalid && vm.indicators.showPreviousEmployment}"
+                                           ng-required="vm.indicators.showPreviousEmployment"
+                                           class="form-control form-control-sm" />                                    
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield:vm.indicators.showPreviousEmployment}">Title/Rank:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.title"
+                                           name="title"
+                                           maxlength="26"
+                                           ng-class="{req:vm.formsubmit && previousEmploymentInfoForm.title.$invalid && vm.indicators.showPreviousEmployment}"
+                                           ng-required="vm.indicators.showPreviousEmployment"
+                                           class="form-control form-control-sm" />                                    
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">City:</label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                           ng-model="vm.uidata.city"
+                                           name="city"
+                                           ng-pattern='/^\D+$/'
+                                           maxlength="20"
+                                           ng-class="{req:vm.formsubmit && previousEmploymentInfoForm.city.$error.pattern}"
+                                           class="form-control form-control-sm" />
+                                    <small ng-show="previousEmploymentInfoForm.city.$error.pattern" class="text-danger">
+                                        Invalid City
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5">State:</label>
+                                <div class="col-md-7">
+                                    <select ng-model="vm.uidata.state"
+                                            ng-selected="$first"
+                                            ng-options="type.key as type.value for type in vm.staticData.ddlState track by type.key"
+                                            class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group row">
+                                <label class="col-md-5" ng-class="{reqfield:vm.indicators.showPreviousEmployment}">Employment:</label>
+                                <div class="col-md-7">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text"
+                                               ng-model="vm.uidata.employmentPeriod.years"
+                                               name="years"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               maxlength="2"
+                                               ng-class="{req:vm.formsubmit && (employmentInfoForm.years.$invalid || previousEmploymentInfoForm.years.$error.pattern) && vm.indicators.showPreviousEmployment}"
+                                               ng-required="vm.indicators.showPreviousEmployment"
+                                               class="form-control"
+                                               placeholder="0" />
+                                        <span class="input-group-addon">Y</span>
+                                        <input type="text"
+                                               ng-model="vm.uidata.employmentPeriod.months"
+                                               name="months"
+                                               ng-pattern='/^[0-9][0-9]{0,1}$/'
+                                               maxlength="2"
+                                               ng-class="{req:vm.formsubmit && (employmentInfoForm.months.$invalid || previousEmploymentInfoForm.months.$error.pattern) && vm.indicators.showPreviousEmployment}"
+                                               ng-required="vm.indicators.showPreviousEmployment"
+                                               class="form-control"
+                                               placeholder="0" />
+                                        <span class="input-group-addon">M</span>
+                                    </div>
+                                    <small ng-show="previousEmploymentInfoForm.years.$error.pattern" class="text-danger">
+                                        Invalid years
+                                    </small>
+                                    <small ng-show="previousEmploymentInfoForm.months.$error.pattern" class="text-danger">
+                                        Invalid months
+                                    </small>
+                                </div>
+                            </div>
+                        </div><!-- col-xs-12 col-sm-12 col-md-4 -->
+
+                    </div><!-- row -->
+
+                </div><!-- card-block -->
+
+            </div><!-- card -->
+
+        </form>
+
+    </div><!-- col-xs-12 -->
+
+</div><!-- row -->
+<!-- Do not Delete Style Tag -->
+<style></style>

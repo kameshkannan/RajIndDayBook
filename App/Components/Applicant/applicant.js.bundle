@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/bundle.xsd">
+  <settings>
+    <!--Determines if the bundle file should be automatically optimized after creation/update.-->
+    <minify>true</minify>
+    <!--Determine whether to generate/re-generate this bundle on building the solution.-->
+    <runOnBuild>true</runOnBuild>
+    <!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectory />
+  </settings>
+  <!--The order of the <file> elements determines the order of the files in the bundle.-->
+  <files>
+    <file>/CentralSales/Auto/App/Components/Applicant/applicant.module.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/applicant.directives.module.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/applicant.controller.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/applicant.constants.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/ApplicantIncome/applicantIncome.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/ApplicantPersonalInfo/applicantPersonalInfo.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/ContactInfo/contactInfo.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/Discovery/discovery.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/CoApplicantSearch/paginator.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/CoApplicantSearch/coapplicantSearch.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/EmploymentInfo/employmentInfo.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/IdInfo/idInfo.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/ResidentialAddress/residentialAddress.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/PreviousAddress/previousAddress.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/MailingAddress/mailingAddress.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/NonApplicantSpouseInfo/nonApplicantSpouseInfo.directive.js</file>
+    <file>/CentralSales/Auto/App/Components/Applicant/PreviousEmploymentInfo/previousEmploymentInfo.directive.js</file>
+  </files>
+</bundle>

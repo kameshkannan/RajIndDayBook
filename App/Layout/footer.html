@@ -1,0 +1,24 @@
+﻿<footer class="footer">
+    <div class="content-copyright">
+        <div class="container">
+            <div class="col-xs-12 col-sm-6 copyright">
+                <p class="text-muted wf-footer">UA Portal &copy; 2014-<span class="txt-curr-year"></span> Wells Fargo. All rights reserved. UA Portal > UCA > CS </p>
+            </div><!-- copyright -->
+            <div class="col-xs-12 col-sm-6 hidden-sm-down text-right activity">
+                <p class="text-muted wf-footer">
+                    <em>Last account activity <i class="fa fa-clock-o"></i> <strong><span class="txt-datestamp"></span></strong></em>
+                </p>
+            </div><!-- activity -->
+        </div><!-- container -->
+    </div><!-- content-copyright -->
+</footer><!-- footer -->
+
+<script type="text/javascript">
+    $(function () {
+        var dateStamp = new Date();
+
+        //footer date/time stamps
+        $('.footer .txt-curr-year').text((new Date).getFullYear());
+        $('.footer .txt-datestamp').livestamp(dateStamp.toISOString());//use account last modified date
+    });
+</script>

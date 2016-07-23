@@ -1,0 +1,19 @@
+﻿<div class="col-xs-12 text-center" ng-show="paginator.pageCount() > 1">
+    <div class="btn-group btn-group-sm" role="group" aria-label="Search Results Pagination">
+        <a class="btn btn-secondary" ng-click="paginator.firstPage()" ng-class="paginator.isFirstPage() && 'disabled'">
+            <span class="fa fa-fast-backward"></span>
+        </a>
+        <a class="btn btn-secondary" ng-click="paginator.perviousPage()" ng-class="paginator.isFirstPage() && 'disabled'">
+            <span class="fa fa-backward"></span>
+        </a>
+        <a class="btn btn-secondary" ng-click="paginator.setPage(i)" ng-repeat="i in [] | forLoop:paginator.lowerLimit():paginator.pageCount() | limitTo : paginator.limitPerPage" ng-class="paginator.page==i && 'active'">
+            {{i+1}}
+        </a>
+        <a class="btn btn-secondary" ng-click="paginator.nextPage()" ng-class="paginator.isLastPage() && 'disabled'">
+            <span class="fa fa-forward"></span>
+        </a>
+        <a class="btn btn-secondary" ng-click="paginator.lastPage()" ng-class="paginator.isLastPage() && 'disabled'">
+            <span class="fa fa-fast-forward"></span>
+        </a>
+    </div><!-- btn-group -->
+</div><!-- col-xs-12 -->

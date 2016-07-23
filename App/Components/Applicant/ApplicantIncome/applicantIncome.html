@@ -1,0 +1,96 @@
+﻿<div class="row">
+
+    <div class="col-xs-12 applicantincome-container">
+
+        <form class="card" name="applicantIncomeForm" novalidate>
+
+            <div class="card-header">APPLICANT INCOME</div><!-- card-header -->
+
+            <div class="card-block">
+                <style type="text/css">
+                    .applicantincome-container .form-group.row .reqfield input.form-control {
+                        width:95%;
+                        display:inline-block;
+                    }
+                </style>
+                <div class="row" ng-repeat="income in vm.uidata" ng-form="incomeform">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-md-4" ng-class="{reqfield:incomeform.source.$valid || incomeform.amount.$valid || incomeform.frequency.$valid}">Income Source:</label>
+                                    <div class="col-md-8">
+                                        <select ng-model="income.incomeSource"
+                                                ng-selected="$first"
+                                                id="source{{$index}}"
+                                                name="source"
+                                                ng-class="{req:incomeform.source.$invalid && (incomeform.amount.$valid || incomeform.frequency.$valid)}"
+                                                ng-options="type.key as type.value for type in vm.staticData.ddlIncomeSource"
+                                                class="form-control form-control-sm"
+                                                ng-change="vm.isDuplicate()"
+                                                ng-required="income.amount == '' || income.frequency != ''" />
+                                    </div>
+                                </div>
+                            </div><!-- col-xs-12 col-sm-12 col-md-3 -->
+                            <!-- ng-class="{reqfield:(incomeform.source.$invalid || incomeform.amount.$invalid || incomeform.frequency.$invalid)}" -->
+                            <div class="col-xs-12 col-sm-12 col-md-2">
+                                <div class="form-group row">
+                                    <div class="col-md-12" ng-class="{reqfield: income.incomeSource=='OTHR'}">
+                                        <input type="text"
+                                               ng-model="income.description"
+                                               id="description{{$index}}"
+                                               name="description"
+                                               ng-disabled="income.incomeSource!='OTHR'"
+                                               class="form-control form-control-sm" />
+                                    </div>
+                                </div>
+                            </div><!-- col-xs-12 col-sm-12 col-md-3 -->
+
+                            <div class="col-xs-12 col-sm-12 col-md-2">
+                                <div class="form-group row">
+                                    <label class="col-md-5" ng-class="{reqfield:incomeform.amount.$valid || incomeform.source.$valid || incomeform.frequency.$valid}">Income:</label>
+                                    <div class="col-md-7">
+                                        <input type="text"
+                                               ng-model="income.amount"
+                                               id="amount{{$index}}"
+                                               name="amount"
+                                               ng-class="{req:incomeform.amount.$invalid && (incomeform.source.$valid || incomeform.frequency.$valid)}"
+                                               class="form-control form-control-sm"
+                                               ng-required="income.incomeSource != '' || income.frequency != ''" />
+                                    </div>
+                                </div>
+                            </div><!-- col-xs-12 col-sm-12 col-md-3 -->
+
+                            <div class="col-xs-12 col-sm-12 col-md-3">
+                                <div class="form-group row">
+                                    <label class="col-md-5" ng-class="{reqfield:incomeform.frequency.$valid || incomeform.source.$valid || incomeform.amount.$valid}">Frequency:</label>
+                                    <div class="col-md-7">
+                                        <select ng-model="income.frequency"
+                                                ng-selected="$first"
+                                                name="frequency"
+                                                id="frequency{{$index}}"
+                                                ng-class="{req:incomeform.frequency.$invalid && (incomeform.source.$valid || incomeform.amount.$valid)}"
+                                                ng-options="type.key as type.value for type in vm.staticData.ddlFrequency"
+                                                class="form-control form-control-sm"
+                                                ng-required="income.incomeSource != '' || income.amount == ''" />
+                                    </div>
+                                </div>
+                            </div><!-- col-xs-12 col-sm-12 col-md-3 -->
+
+                            <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1" ng-init="vm.count=vm.uidata.length" ng-show="$index == (vm.count -1)">
+                                <input type="button" value="Add" ng-click="vm.add()" class="btn btn-wf btn-sm" ng-hide="vm.uidata.length == 6" />
+                            </div><!-- col-xs-12 col-sm-12 col-md-1 col-lg-1 -->
+
+                        </div><!-- row -->
+
+                    </div><!-- col-xs-12 col-sm-11 col-md-11 -->
+                </div><!-- row -->
+
+            </div><!-- card-block -->
+
+        </form><!-- card -->
+
+    </div><!-- col-xs-12 -->
+
+</div><!-- row -->
+<style></style>
