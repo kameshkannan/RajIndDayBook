@@ -1,91 +1,91 @@
 ﻿//Common is used to load dropdownValues for all the pages
 
-var dayBook = {
+//var dayBook = {
 
-    toDay: [
-            {
-                id: 1,
-                particulars: 'BySales',
-                configuredTranId: '',
-                bankId: '',
-                transferModeId: '',
-                cashReceipt: '3400',
-                cashPayment: ''
-            },
-            {
-                id: 2,
-                particulars: 'BySales',
-                configuredTranId: '',
-                bankId: '',
-                transferModeId: '',
-                cashReceipt: '2500',
-                cashPayment: ''
-            },
-            {
-                id: 3,
-                particulars: 'By Cash',
-                configuredTranId: '',
-                bankId: '',
-                transferModeId: '',
-                cashReceipt: '',
-                cashPayment: '1200'
-            },
-            {
-                id: 4,
-                particulars: 'By Cash',
-                configuredTranId: '',
-                bankId: '',
-                transferModeId: '',
-                cashReceipt: '',
-                cashPayment: '200'
-            },
-            {
-                id: 5,
-                particulars: 'By Sales',
-                configuredTranId: '',
-                bankId: '',
-                transferModeId: '',
-                cashReceipt: '4500',
-                cashPayment: ''
-            },
-            {
-                id: 6,
-                particulars: 'By Sales',
-                configuredTranId: '',
-                bankId: '',
-                transferModeId: '',
-                cashReceipt: '4500',
-                cashPayment: ''
-            },
-            {
-                id: 7,
-                particulars: 'To Hi-Tech Farms',
-                configuredTranId: 2,
-                bankId: 3,
-                transferModeId: 1,
-                cashReceipt: '',
-                cashPayment: '25000'
-            },
-            {
-                id: 8,
-                particulars: 'To Dharanee',
-                configuredTranId: 1,
-                bankId: 1,
-                transferModeId: 1,
-                cashReceipt: '',
-                cashPayment: '15000'
-            },
-            {
-                id: 9,
-                particulars: 'To Dharanee',
-                configuredTranId: 1,
-                bankId: 2,
-                transferModeId: 3,
-                cashReceipt: '',
-                cashPayment: '10000'
-            }
-    ]
-};
+//    toDay: [
+//            {
+//                id: 1,
+//                particulars: 'BySales',
+//                configuredTranId: '',
+//                bankId: '',
+//                transferModeId: '',
+//                cashReceipt: '3400',
+//                cashPayment: ''
+//            },
+//            {
+//                id: 2,
+//                particulars: 'BySales',
+//                configuredTranId: '',
+//                bankId: '',
+//                transferModeId: '',
+//                cashReceipt: '2500',
+//                cashPayment: ''
+//            },
+//            {
+//                id: 3,
+//                particulars: 'By Cash',
+//                configuredTranId: '',
+//                bankId: '',
+//                transferModeId: '',
+//                cashReceipt: '',
+//                cashPayment: '1200'
+//            },
+//            {
+//                id: 4,
+//                particulars: 'By Cash',
+//                configuredTranId: '',
+//                bankId: '',
+//                transferModeId: '',
+//                cashReceipt: '',
+//                cashPayment: '200'
+//            },
+//            {
+//                id: 5,
+//                particulars: 'By Sales',
+//                configuredTranId: '',
+//                bankId: '',
+//                transferModeId: '',
+//                cashReceipt: '4500',
+//                cashPayment: ''
+//            },
+//            {
+//                id: 6,
+//                particulars: 'By Sales',
+//                configuredTranId: '',
+//                bankId: '',
+//                transferModeId: '',
+//                cashReceipt: '4500',
+//                cashPayment: ''
+//            },
+//            {
+//                id: 7,
+//                particulars: 'To Hi-Tech Farms',
+//                configuredTranId: 2,
+//                bankId: 3,
+//                transferModeId: 1,
+//                cashReceipt: '',
+//                cashPayment: '25000'
+//            },
+//            {
+//                id: 8,
+//                particulars: 'To Dharanee',
+//                configuredTranId: 1,
+//                bankId: 1,
+//                transferModeId: 1,
+//                cashReceipt: '',
+//                cashPayment: '15000'
+//            },
+//            {
+//                id: 9,
+//                particulars: 'To Dharanee',
+//                configuredTranId: 1,
+//                bankId: 2,
+//                transferModeId: 3,
+//                cashReceipt: '',
+//                cashPayment: '10000'
+//            }
+//    ]
+//};
 
 var banks = {
     configuredBanks: [

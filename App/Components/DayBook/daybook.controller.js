@@ -14,10 +14,15 @@
         //=======================================================================================================================
 
         var vm = this;
-        vm.today = dynamicDataService.getTodayBook();
+        vm.today = [];
+
+        dynamicDataService.getTodayBook().then(function (response) {
+            vm.today = response.data;
+        });
+
         vm.addItem = addDayBookItem;
         vm.selectItem = selectItem;
-        
+
         vm.autoList = dynamicDataService.getConfiguredTransNames();
         vm.getBanksFor = getBanksFor;
         vm.getTransferModesForBank = getTransferModesForBank;
@@ -40,6 +45,7 @@
             transferModeId: '',
             transferModeName: ''
         }];
+
         vm.bankTran = false;
 
         //=======================================================================================================================
@@ -47,37 +53,37 @@
         //=======================================================================================================================       
         function addDayBookItem(item) {
 
-            if (item.particulars == "" && item.cashPayment == null && item.cashReceipt == null) {
+            if (item.Particulars == "" && item.CashPayment == null && item.CashReceipt == null) {
                 return;
             }
-            if (item.cashPayment == null && item.cashReceipt == null) {
+            if (item.CashPayment == null && item.CashReceipt == null) {
                 return;
             }
 
-            if (item.id == null) {
+            if (item.Id == null) {
 
-                item.id = vm.today.length + 1;
+                item.Id = vm.today.length + 1;
                 vm.today.push(
                     {
-                        particulars: getParticulars(item),
-                        cashReceipt: item.cashReceipt || 0,
-                        cashPayment: item.cashPayment || 0,
-                        bankId: item.bankId,
-                        transferModeId: item.transferModeId,
-                        configuredTranId: item.configuredTranId
+                        Particulars: getParticulars(item),
+                        CashReceipt: item.CashReceipt || 0,
+                        CashPayment: item.CashPayment || 0,
+                        BankId: item.BankId,
+                        TransferModeId: item.TransferModeId,
+                        ConfiguredTranId: item.ConfiguredTranId
                     });
 
             }
 
-            if (item.id != null) {
+            if (item.Id != null) {
                 for (var i = 0; i < vm.today.length; i++) {
-                    if (vm.today[i].id == item.id) {
-                        vm.today[i].particulars = getParticulars(item);
-                        vm.today[i].cashReceipt = item.cashReceipt || 0;
-                        vm.today[i].cashPayment = item.cashPayment || 0;
-                        vm.today[i].bankId = item.bankId;
-                        vm.today[i].transferModeId = item.transferModeId;
-                        vm.today[i].configuredTranId = item.configuredTranId;
+                    if (vm.today[i].Id == item.Id) {
+                        vm.today[i].Particulars = getParticulars(item);
+                        vm.today[i].CashReceipt = item.CashReceipt || 0;
+                        vm.today[i].CashPayment = item.CashPayment || 0;
+                        vm.today[i].BankId = item.BankId;
+                        vm.today[i].TransferModeId = item.TransferModeId;
+                        vm.today[i].ConfiguredTranId = item.ConfiguredTranId;
                     }
                 }
             }
@@ -88,7 +94,7 @@
         };
 
         function deleteDaybookItem() {
-            for (var i = vm.today.length -1; i >=0 ; i--) {
+            for (var i = vm.today.length - 1; i >= 0 ; i--) {
                 if (vm.today[i].rowSelected) {
                     vm.today.splice(i, 1);
                 }
@@ -124,24 +130,24 @@
 
         function selectItem(item) {
 
-            vm.item.id = item.id;
-            var position = item.particulars.indexOf('(');
+            vm.item.Id = item.Id;
+            var position = item.Particulars.indexOf('(');
 
             if (position == -1)
-                vm.item.particulars = item.particulars;
+                vm.item.Particulars = item.Particulars;
             else
-                vm.item.particulars = item.particulars.substring(0, position);
+                vm.item.Particulars = item.Particulars.substring(0, position);
 
-            vm.item.cashReceipt = (item.cashReceipt == "") ? item.cashReceipt : parseFloat(item.cashReceipt);
-            vm.item.cashPayment = (item.cashPayment == "") ? item.cashPayment : parseFloat(item.cashPayment);
-            vm.item.configuredTranId = item.configuredTranId;
-            vm.item.bankId = item.bankId;
-            vm.item.transferModeId = item.transferModeId;
+            vm.item.CashReceipt = (item.CashReceipt == "") ? item.CashReceipt : parseFloat(item.CashReceipt);
+            vm.item.CashPayment = (item.CashPayment == "") ? item.CashPayment : parseFloat(item.CashPayment);
+            vm.item.ConfiguredTranId = item.ConfiguredTranId;
+            vm.item.BankId = item.BankId;
+            vm.item.TransferModeId = item.TransferModeId;
 
-            getBanksFor(item.configuredTranId);
-            vm.getTransferModesForBank(vm.item.configuredTranId, vm.item.bankId);
+            getBanksFor(item.ConfiguredTranId);
+            vm.getTransferModesForBank(vm.item.ConfiguredTranId, vm.item.BankId);
 
-            if (item.configuredTranId != '')
+            if (item.ConfiguredTranId != '')
                 vm.bankTran = true;
             else
                 vm.bankTran = false;
@@ -161,12 +167,12 @@
         //This method will set the Bank related details when selecting from Drop down.
         function setId() {
             for (var i = 0; i < vm.autoList.length; i++) {
-                if (vm.item.particulars == vm.autoList[i].name) {
-                    vm.item.configuredTranId = vm.autoList[i].id;
+                if (vm.item.Particulars == vm.autoList[i].name) {
+                    vm.item.ConfiguredTranId = vm.autoList[i].id;
                     vm.bankTran = true;
 
                     //Call the Bank 
-                    getBanksFor(vm.item.configuredTranId);
+                    getBanksFor(vm.item.ConfiguredTranId);
                     break;
                 } else {
                     vm.item.configuredTranId = '';
@@ -180,10 +186,10 @@
 
         function getParticulars(item) {
 
-            if (item.configuredTranId != undefined && item.configuredTranId != null && item.configuredTranId != '') {
-                var bankName = dynamicDataService.getBankShortName(vm.item.bankId);
-                var bankTransferName = dynamicDataService.getBankTransferType(vm.item.bankId, vm.item.transferModeId)
-                return item.particulars + ' (' + bankName + ' - ' + bankTransferName + ')';
+            if (item.ConfiguredTranId != undefined && item.ConfiguredTranId != null && item.ConfiguredTranId != '') {
+                var bankName = dynamicDataService.getBankShortName(vm.item.BankId);
+                var bankTransferName = dynamicDataService.getBankTransferType(vm.item.BankId, vm.item.TransferModeId)
+                return item.Particulars + ' (' + bankName + ' - ' + bankTransferName + ')';
             }
 
             return item.particulars;
@@ -199,13 +205,13 @@
 
         function reset() {
             vm.item = {
-                id: null,
-                particulars: "",
-                configuredTranId: '',
-                bankId: '',
-                transferModeId: '',
-                cashReceipt: null,
-                cashPayment: null
+                Id: null,
+                Particulars: "",
+                ConfiguredTranId: '',
+                BankId: '',
+                TransferModeId: '',
+                CashReceipt: null,
+                CashPayment: null
             };
 
             vm.transferModes = [];
@@ -225,6 +231,6 @@
                 vm.cashReceiptsTotal = vm.cashReceiptsTotal + parseFloat(vm.today[i].cashReceipt || 0);
             }
         }
-         
+
     };
 })();

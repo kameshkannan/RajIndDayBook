@@ -8,6 +8,8 @@
     function RouteController($router, $window, $scope) {
 
         var vm = this;
+        //$httpProvider.defaults.useXDomain = true;
+        //delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         $router.config([
             {
@@ -44,7 +46,6 @@
             }
         ]);
     };
-
 
 })();
 

@@ -5,14 +5,16 @@
 
     angular.module(RAJIND.SERVICES_MODULE).factory("dynamicDataService", dynamicDataService);
 
-    //dynamicDataService.$inject = ["$http", "viewDataService"];
+    dynamicDataService.$inject = ["$http"];
 
-    function dynamicDataService() {
+    function dynamicDataService($http) {
 
         //=======================================================================================================================
         //Service Method Definitions 
         //=======================================================================================================================
+
         var service = {};
+
         service.getTodayBook = getTodayBook;
         service.getBankModeOfTransfers = getBankModeOfTransfers;
         service.getConfiguredBanks = getConfiguredBanks;
@@ -23,6 +25,7 @@
         service.getConfiguredTransNames = getConfiguredTransNames;
         service.getBanksFor = getBanksFor;
         service.getTransferModesForBank = getTransferModesForBank;
+
         return service;
 
         //=======================================================================================================================
@@ -30,18 +33,20 @@
         //=======================================================================================================================
 
         function getTodayBook() {
-            //var promise = $http({
-            //    method: "POST",
-            //    url: UCACS.ACHACCOUNT_NUMBER_WEBAPI_URL,
-            //    data: ucacsInitialData,
-            //    headers: {
-            //        'Content-Type': 'application/json'
-            //    }
-            //});
 
-            //return promise;
+            //var res = [];
+            var promise = $http({
+                method: "GET",
+                url: "http://localhost/RajIndServices/api/daybook/",
+                headers: { "Access-Control-Allow-Origin": "*" }
+            })
+            .then(function (data, status, headers, config) {
+                console.log("Service call is success");
+                return data;
+            });
 
-            return dayBook.toDay;
+            return promise;
+            //return dayBook.toDay;
         };
 
         function getBankModeOfTransfers() {
@@ -120,8 +125,8 @@
                     bankShortName: getBankShortName(banksTemp[j].bankId)
                 })
             }
-            
-            return bankObj; 
+
+            return bankObj;
         }
 
         function getTransferModesForBank(configuredTranId, bankId) {
